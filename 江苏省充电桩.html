@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>江苏充电桩分析</title>
+    <script src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script src="https://assets.pyecharts.org/assets/maps/jiangsu.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            width: 1200px;
+            height: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #666;
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>江苏省充电桩分布分析</h1>
+        <h2>数据来源：江苏省能源局 | 2023年数据</h2>
+    </div>
+    <div id="chart" class="chart-container"></div>
+
+    <script>
+        var chart = echarts.init(document.getElementById('chart'), null, {
+            width: 1200,
+            height: 900,
+            renderer: 'canvas'
+        });
+
+        var option = {
+            backgroundColor: '#FFFFFF',
+            title: {
+                text: '江苏省充电桩分布分析',
+                subtext: '数据来源：江苏省能源局 | 2023年数据',
+                left: 'center',
+                textStyle: {
+                    fontSize: 18,
+                    color: '#333'
+                },
+                subtextStyle: {
+                    fontSize: 12,
+                    color: '#666'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}个',
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                borderColor: '#333',
+                textStyle: {
+                    color: '#FFF'
+                }
+            },
+            series: {
+                type: 'sunburst',
+                data: [
+                    {
+                        name: '江苏省充电桩',
+                        itemStyle: {color: '#5470C6'},
+                        children: [
+                            {
+                                name: '南京市',
+                                itemStyle: {color: '#EE6666'},
+                                children: [
+                                    {name: '鼓楼区\n1250个', value: 1250, itemStyle: {color: '#FF9999'}},
+                                    {name: '玄武区\n980个', value: 980, itemStyle: {color: '#FFCCCC'}},
+                                    {name: '秦淮区\n870个', value: 870, itemStyle: {color: '#FF6666'}},
+                                    {name: '建邺区\n760个', value: 760, itemStyle: {color: '#FF9999'}},
+                                    {name: '江宁区\n1500个', value: 1500, itemStyle: {color: '#FFCCCC'}}
+                                ]
+                            },
+                            {
+                                name: '苏州市',
+                                itemStyle: {color: '#91CC75'},
+                                children: [
+                                    {name: '工业园区\n1100个', value: 1100, itemStyle: {color: '#C2E7B0'}},
+                                    {name: '姑苏区\n850个', value: 850, itemStyle: {color: '#A3D97E'}},
+                                    {name: '高新区\n920个', value: 920, itemStyle: {color: '#B5E18F'}}
+                                ]
+                            },
+                            {
+                                name: '无锡市',
+                                itemStyle: {color: '#FAC858'},
+                                children: [
+                                    {name: '梁溪区\n780个', value: 780, itemStyle: {color: '#FDDD9B'}},
+                                    {name: '滨湖区\n650个', value: 650, itemStyle: {color: '#FFECAF'}},
+                                    {name: '新吴区\n720个', value: 720, itemStyle: {color: '#FDE68A'}}
+                                ]
+                            },
+                            {
+                                name: '其他城市',
+                                itemStyle: {color: '#73C0DE'},
+                                children: [
+                                    {name: '常州市\n680个', value: 680, itemStyle: {color: '#A5D8F3'}},
+                                    {name: '南通市\n590个', value: 590, itemStyle: {color: '#8AC9E6'}},
+                                    {name: '徐州市\n620个', value: 620, itemStyle: {color: '#9FD4EB'}},
+                                    {name: '盐城市\n540个', value: 540, itemStyle: {color: '#B7E0F5'}}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        name: '充电桩类型',
+                        itemStyle: {color: '#3BA272'},
+                        children: [
+                            {
+                                name: '快充桩',
+                                itemStyle: {color: '#67C23A'},
+                                children: [
+                                    {name: '60kW\n3200个', value: 3200, itemStyle: {color: '#95D475'}},
+                                    {name: '120kW\n1800个', value: 1800, itemStyle: {color: '#B3E19D'}},
+                                    {name: '180kW\n900个', value: 900, itemStyle: {color: '#D1EDC4'}}
+                                ]
+                            },
+                            {
+                                name: '慢充桩',
+                                itemStyle: {color: '#E6A23C'},
+                                children: [
+                                    {name: '7kW\n4500个', value: 4500, itemStyle: {color: '#F3D19E'}},
+                                    {name: '14kW\n2300个', value: 2300, itemStyle: {color: '#F8E3C5'}}
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                radius: [0, '90%'],
+                label: {
+                    color: '#333',
+                    fontSize: 10,
+                    fontWeight: 'bold',
+                    formatter: '{b}'
+                },
+                levels: [
+                    {},
+                    {
+                        r0: '10%',
+                        r: '35%',
+                        itemStyle: {borderWidth: 1, borderColor: '#FFF'},
+                        label: {rotate: 'tangential', fontSize: 12}
+                    },
+                    {
+                        r0: '35%',
+                        r: '70%',
+                        label: {align: 'right', fontSize: 11}
+                    },
+                    {
+                        r0: '70%',
+                        r: '75%',
+                        label: {
+                            position: 'outside',
+                            padding: 3,
+                            silent: false,
+                            fontSize: 10,
+                            color: '#333'
+                        },
+                        itemStyle: {borderWidth: 1, borderColor: '#FFF'}
+                    }
+                ]
+            }
+        };
+
+        chart.setOption(option);
+        
+        // 响应式调整
+        window.addEventListener('resize', function() {
+            chart.resize();
+        });
+    </script>
+</body>
+</html>
