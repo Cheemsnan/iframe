@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>江苏省各城市GDP排名及增长率分析</title>
+    <script src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script src="https://assets.pyecharts.org/assets/maps/jiangsu.js"></script>
+    <script src="https://assets.pyecharts.org/assets/themes/wonderland.js"></script>
+</head>
+<body>
+    <div id="chart" style="width:1200px; height:600px;"></div>
+    <script>
+        var chart = echarts.init(document.getElementById('chart'), 'wonderland');
+        
+        var option = {
+            title: {
+                text: "江苏省各城市GDP排名及增长率分析",
+                left: "center"
+            },
+            tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                    type: "cross"
+                }
+            },
+            legend: {
+                top: "10%"
+            },
+            grid: {
+                left: "10%",
+                right: "8%",
+                top: "20%"
+            },
+            xAxis: {
+                type: "category",
+                data: ["苏州", "南京", "无锡", "南通", "常州", "徐州", "扬州", "盐城", "泰州", "镇江", "淮安", "宿迁", "连云港"],
+                axisLabel: {
+                    rotate: 30
+                },
+                splitLine: {
+                    show: true
+                }
+            },
+            yAxis: [
+                {
+                    type: "value",
+                    name: "GDP总量(亿)",
+                    min: 0,
+                    max: 6500,
+                    position: "left",
+                    axisLine: {
+                        lineStyle: {
+                            color: "#5793f3"
+                        }
+                    },
+                    axisLabel: {
+                        formatter: "{value}亿"
+                    }
+                },
+                {
+                    type: "value",
+                    name: "增长率(%)",
+                    min: 0,
+                    max: 12,
+                    position: "right",
+                    axisLine: {
+                        lineStyle: {
+                            color: "#d14a61"
+                        }
+                    },
+                    axisLabel: {
+                        formatter: "{value}%"
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    type: "slider"
+                },
+                {
+                    type: "inside"
+                }
+            ],
+            series: [
+                {
+                    name: "GDP总量(亿)",
+                    type: "bar",
+                    data: [6095.68, 4718.7, 3789.21, 3125.3, 2416.9, 2251.7, 1971.99, 1940.38, 1852.91, 1454.32, 1358.31, 1079.34, 1043.09],
+                    yAxisIndex: 0,
+                    itemStyle: {
+                        color: "#5793f3"
+                    },
+                    label: {
+                        show: false,
+                        position: "top",
+                        formatter: function(params) {
+                            return params.value + "亿";
+                        }
+                    }
+                },
+                {
+                    name: "名义增长率(%)",
+                    type: "line",
+                    data: [9.85, 8.24, 5.72, 4.8, 6.51, 6.29, 5.54, 8.0, 5.73, 5.99, 8.04, 9.98, 6.76],
+                    yAxisIndex: 1,
+                    symbol: "triangle",
+                    symbolSize: 8,
+                    itemStyle: {
+                        color: "#d14a61"
+                    },
+                    lineStyle: {
+                        width: 3
+                    },
+                    label: {
+                        show: true
+                    }
+                },
+                {
+                    name: "实际增长率(%)",
+                    type: "line",
+                    data: [6.0, 5.3, 5.7, 6.0, 6.1, 5.9, 6.2, 6.1, 5.9, 6.0, 7.0, 6.6, 5.9],
+                    yAxisIndex: 1,
+                    symbol: "diamond",
+                    symbolSize: 8,
+                    itemStyle: {
+                        color: "#FFA500"
+                    },
+                    lineStyle: {
+                        width: 3
+                    },
+                    label: {
+                        show: true
+                    }
+                }
+            ],
+            graphic: [
+                {type: 'text', left: '10%', top: '12%', style: {text: '1', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '17.5%', top: '12%', style: {text: '2', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '25%', top: '12%', style: {text: '3', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '32.5%', top: '12%', style: {text: '4', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '40%', top: '12%', style: {text: '5', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '47.5%', top: '12%', style: {text: '6', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '55%', top: '12%', style: {text: '7', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '62.5%', top: '12%', style: {text: '8', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '70%', top: '12%', style: {text: '9', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '77.5%', top: '12%', style: {text: '10', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '85%', top: '12%', style: {text: '11', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '92.5%', top: '12%', style: {text: '12', fill: '#333', fontSize: 14, fontWeight: 'bold'}},
+                {type: 'text', left: '100%', top: '12%', style: {text: '13', fill: '#333', fontSize: 14, fontWeight: 'bold'}}
+            ]
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>
