@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>江苏各地区光储充技术经济分析</title>
+    <script src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/js/china.js"></script>
+    <style>
+        #chart-container {
+            width: 1200px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 初始化ECharts实例
+        var chartDom = document.getElementById('chart-container');
+        var myChart = echarts.init(chartDom);
+        
+        // 数据准备
+        var regions = ["南京ROI", "苏南ROI", "苏中ROI", "苏北ROI"];
+        var tech_data = {
+            "光储充适用指数": [92, 85, 63, 48],
+            "电网负载率(%)": [0.75, 0.78, 0.82, 0.68],
+            "超充站占比(%)": [0.15, 0.12, 0.08, 0.05]
+        };
+        var economic_data = {
+            "老旧小区统建": [1.2, 0.8, 0.3, 0.4],
+            "高速光储充站": [0.9, 1.5, 0.6, 0.7],
+            "商圈分时定价": [1.5, 2.1, 1.0, 0.9]
+        };
+
+        // 配置项
+        var option = {
+            title: {
+                text: '江苏各地区光储充技术经济分析',
+                left: 'center',
+                top: 10
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            legend: {
+                data: ['光储充适用指数', '电网负载率(%)', '老旧小区统建', '高速光储充站', '商圈分时定价'],
+                right: 50,
+                top: 40
+            },
+            grid: {
+                left: '15%',
+                right: '15%',
+                bottom: '15%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: regions,
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    axisLabel: {
+                        rotate: 30
+                    },
+                    name: '地区',
+                    nameLocation: 'middle',
+                    nameGap: 30
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '电网负载率',
+                    min: 0,
+                    max: 100,
+                    position: 'right',
+                    offset: 80,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#d14a61'
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value}%'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '光储充适用指数',
+                    min: 0,
+                    max: 100,
+                    position: 'right',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#5793f3'
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 分'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: 'ROI指数',
+                    min: 0,
+                    max: 3,
+                    position: 'left',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#675bba'
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value}'
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        }
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '光储充适用指数',
+                    type: 'bar',
+                    yAxisIndex: 1,
+                    data: tech_data["光储充适用指数"],
+                    itemStyle: {
+                        color: '#5793f3'
+                    },
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                {
+                    name: '电网负载率(%)',
+                    type: 'bar',
+                    yAxisIndex: 0,
+                    data: tech_data["电网负载率(%)"].map(function (x) { return x * 100; }),
+                    itemStyle: {
+                        color: '#d14a61'
+                    },
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                {
+                    name: '老旧小区统建',
+                    type: 'line',
+                    yAxisIndex: 2,
+                    data: economic_data["老旧小区统建"],
+                    itemStyle: {
+                        color: '#FFA500'
+                    },
+                    symbol: 'diamond',
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                {
+                    name: '高速光储充站',
+                    type: 'line',
+                    yAxisIndex: 2,
+                    data: economic_data["高速光储充站"],
+                    itemStyle: {
+                        color: '#2E8B57'
+                    },
+                    symbol: 'triangle',
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                {
+                    name: '商圈分时定价',
+                    type: 'line',
+                    yAxisIndex: 2,
+                    data: economic_data["商圈分时定价"],
+                    itemStyle: {
+                        color: '#9400D3'
+                    },
+                    symbol: 'roundRect',
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                }
+            ]
+        };
+
+        // 使用配置项显示图表
+        myChart.setOption(option);
+        
+        // 响应式调整
+        window.addEventListener('resize', function() {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>
