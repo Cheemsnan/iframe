@@ -37,18 +37,25 @@
                     '老旧小区统建',
                     '高速光储充站',
                     '商圈分时定价'
-                ]
+                ],
+                top: '5%'
             },
             grid: {
                 left: '5%',
                 right: '20%',
-                containLabel: true
+                containLabel: true,
+                top: '15%'
             },
             xAxis: {
                 type: 'category',
                 data: ['南京ROI', '苏南ROI', '苏中ROI', '苏北ROI'],
                 axisLabel: {
                     rotate: 30
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#800080' // 新增x轴颜色
+                    }
                 }
             },
             yAxis: [
@@ -61,7 +68,7 @@
                     offset: 80,
                     axisLine: {
                         lineStyle: {
-                            color: '#d14a61'
+                            color: '#FF6347' // 修改电网负载率颜色
                         }
                     },
                     axisLabel: {
@@ -74,9 +81,10 @@
                     min: 0,
                     max: 100,
                     position: 'right',
+                    offset: 0,
                     axisLine: {
                         lineStyle: {
-                            color: '#5793f3'
+                            color: '#00BFFF' // 修改光储充适用指数颜色
                         }
                     },
                     axisLabel: {
@@ -91,7 +99,7 @@
                     position: 'left',
                     axisLine: {
                         lineStyle: {
-                            color: '#675bba'
+                            color: '#32CD32' // 修改ROI指数颜色
                         }
                     },
                     splitLine: {
@@ -109,7 +117,7 @@
                     data: [92, 85, 63, 48],
                     yAxisIndex: 1,
                     itemStyle: {
-                        color: '#5793f3'
+                        color: '#00BFFF' // 修改光储充适用指数柱状图颜色
                     },
                     label: {
                         show: true,
@@ -122,7 +130,7 @@
                     data: [75, 78, 82, 68],
                     yAxisIndex: 0,
                     itemStyle: {
-                        color: '#d14a61'
+                        color: '#FF6347' // 修改电网负载率柱状图颜色
                     },
                     label: {
                         show: true,
@@ -137,7 +145,7 @@
                     symbol: 'diamond',
                     symbolSize: 10,
                     itemStyle: {
-                        color: '#FFA500'
+                        color: '#8A2BE2' // 修改老旧小区统建折线图颜色
                     },
                     label: {
                         show: true
@@ -151,7 +159,7 @@
                     symbol: 'triangle',
                     symbolSize: 10,
                     itemStyle: {
-                        color: '#2E8B57'
+                        color: '#20B2AA' // 修改高速光储充站折线图颜色
                     },
                     label: {
                         show: true
@@ -165,7 +173,7 @@
                     symbol: 'roundRect',
                     symbolSize: 10,
                     itemStyle: {
-                        color: '#9400D3'
+                        color: '#FF8C00' // 修改商圈分时定价折线图颜色
                     },
                     label: {
                         show: true
